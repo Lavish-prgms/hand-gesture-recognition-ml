@@ -55,15 +55,19 @@ The actions associated with each gesture depend on the selected control program.
 ## Project Structure
 
 ```text
+
 Hand_Gesture_Recognition/
 ├── data/
-│   └── hand_gestures.csv
+│   ├── hand_gestures.csv
+│   └── hand_gestures_test.csv
 ├── model/
-│   └── gesture_model.pkl
+│   ├── gesture_model.pkl
+│   └── evaluation_metrics.json
 ├── hand_detection.py
 ├── collect_data.py
 ├── add_samples.py
 ├── train_model.py
+├── evaluate_model.py
 ├── live_gesture_recognition.py
 ├── desktop_gesture_control.py
 ├── gesture_ppt_control.py
@@ -71,18 +75,21 @@ Hand_Gesture_Recognition/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+
 ```
 
 ## Installation
 
+
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-cd Hand_Gesture_Recognition
+git clone https://github.com/Lavish-prgms/hand-gesture-recognition-ml.git
+cd hand-gesture-recognition-ml
 ```
 
-Replace `YOUR_GITHUB_REPOSITORY_URL` with the repository URL.
+```
+
 
 ### 2. Create a virtual environment
 
