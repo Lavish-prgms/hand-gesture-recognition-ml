@@ -1,6 +1,6 @@
 
 from pathlib import Path
-
+import json
 import pandas as pd
 import streamlit as st
 
@@ -9,6 +9,7 @@ import streamlit as st
 BASE_DIR = Path(__file__).resolve().parent
 DATA_FILE = BASE_DIR / "data" / "hand_gestures.csv"
 MODEL_FILE = BASE_DIR / "model" / "gesture_model.pkl"
+METRICS_FILE = BASE_DIR / "model" / "evaluation_metrics.json"
 
 PROJECT_FILES = [
     "hand_detection.py",
@@ -178,11 +179,12 @@ st.divider()
 
 # ---------------- NAVIGATION TABS ----------------
 
-overview_tab, dataset_tab, model_tab, demo_tab = st.tabs(
+overview_tab, dataset_tab, model_tab, performance_tab, demo_tab = st.tabs(
     [
         "🏠 Overview",
         "📊 Dataset Explorer",
         "🧠 Model Details",
+        "📈 Performance",
         "🎮 Demo Guide",
     ]
 )
@@ -343,6 +345,90 @@ with model_tab:
         "because the current training script does not save independent "
         "evaluation results for this dashboard."
     )
+
+# ================= MODEL PERFORMANCE =================
+
+with performance_tab:
+    st.subheader("Model Performance — Fresh Test Session")
+
+    if not METRICS_FILE.exists():
+        st.info(
+            "Evaluation results not found. Run evaluate_model.py "
+            "locally and save model/evaluation_metrics.json first."
+        )
+    else:
+        try:
+            with open(METRICS_FILE, "r", encoding="utf-8") as file:
+                results = json.load(file)
+
+            st.caption(results.get("evaluation_type", "Evaluation results"))
+
+            col1, col2, col3 = st.columns(3)
+
+            col1.metric(
+                "Test Accuracy",
+                f"{results['accuracy'] * 100:.2f}%"
+            )
+            col2.metric(
+                "Test Samples",
+                results["test_samples"]
+            )
+            col3.metric(
+                "Gesture Classes",
+                len(results["classes"])
+            )
+
+            report = pd.DataFrame.from_dict(
+                results["per_class"],
+                orient="index"
+            )
+            report.index.name = "Gesture"
+
+            st.subheader("Gesture-wise Performance")
+
+            st.dataframe(
+                report.style.format({
+                    "precision": "{:.2%}",
+                    "recall": "{:.2%}",
+                    "f1-score": "{:.2%}",
+                    "support": "{:.0f}",
+                }),
+                use_container_width=True
+            )
+
+            st.subheader("Precision, Recall and F1-score")
+
+            st.bar_chart(
+                report[["precision", "recall", "f1-score"]]
+            )
+
+            st.subheader("Confusion Matrix")
+
+            matrix = pd.DataFrame(
+                results["confusion_matrix"],
+                index=results["classes"],
+                columns=results["classes"]
+            )
+
+            matrix.index.name = "Actual Gesture"
+            matrix.columns.name = "Predicted Gesture"
+
+            st.dataframe(matrix, use_container_width=True)
+
+            st.caption(
+                "Rows represent actual gestures; columns represent "
+                "predicted gestures. Off-diagonal values indicate "
+                "misclassifications."
+            )
+
+            st.warning(
+                "These results apply to the recorded test session "
+                "and do not guarantee the same accuracy in all conditions."
+            )
+
+        except Exception as error:
+            st.error(f"Could not load evaluation results: {error}")
+
 
 # ================= DEMONSTRATION GUIDE =================
 

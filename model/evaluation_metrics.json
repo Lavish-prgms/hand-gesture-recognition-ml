@@ -1,0 +1,81 @@
+{
+  "evaluation_type": "Fresh webcam session, separate from the training CSV",
+  "accuracy": 1.0,
+  "test_samples": 300,
+  "classes": [
+    "fist",
+    "open_palm",
+    "peace",
+    "pointing",
+    "thumbs_up"
+  ],
+  "per_class": {
+    "fist": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 60
+    },
+    "open_palm": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 60
+    },
+    "peace": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 60
+    },
+    "pointing": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 60
+    },
+    "thumbs_up": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 60
+    }
+  },
+  "confusion_matrix": [
+    [
+      60,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      60,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      60,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      60,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      60
+    ]
+  ]
+}
