@@ -88,8 +88,6 @@ git clone https://github.com/Lavish-prgms/hand-gesture-recognition-ml.git
 cd hand-gesture-recognition-ml
 ```
 
-```
-
 
 ### 2. Create a virtual environment
 
