@@ -4,8 +4,8 @@ pandas
 numpy
 scikit-learn
 joblib
-mediapipe==0.10.21
-opencv-python
 matplotlib
+mediapipe==0.10.21; sys_platform == "win32"
+opencv-contrib-python; sys_platform == "win32"
 pyautogui; sys_platform == "win32"
 pywin32; sys_platform == "win32"
