@@ -102,6 +102,21 @@ Activate it on Windows PowerShell:
 python -m pip install -r requirements.txt
 ```
 
+
+## Model Evaluation
+
+Run the following command to evaluate the trained model on a fresh webcam test session:
+
+```bash
+python evaluate_model.py
+```
+
+The script collects test samples for the five predefined gestures and reports accuracy, precision, recall, F1-score, and the confusion matrix.
+
+Evaluation results are saved to `model/evaluation_metrics.json`.
+
+Results reflect the recorded test session and may vary with users, lighting, camera quality, and hand position.
+
 ## Run the Project
 
 ### Launch the dashboard

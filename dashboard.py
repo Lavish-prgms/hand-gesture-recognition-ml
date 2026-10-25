@@ -16,6 +16,7 @@ PROJECT_FILES = [
     "collect_data.py",
     "add_samples.py",
     "train_model.py",
+    "evaluate_model.py",
     "live_gesture_recognition.py",
     "desktop_gesture_control.py",
     "gesture_ppt_control.py",
@@ -339,12 +340,11 @@ with model_tab:
         """
     )
 
-    st.warning(
-        "Model confidence and test accuracy are different. "
-        "The dashboard does not claim a verified accuracy percentage "
-        "because the current training script does not save independent "
-        "evaluation results for this dashboard."
-    )
+    st.info(
+    "Fresh-session evaluation results are available in the Performance "
+    "tab. Results describe the recorded test session and may differ "
+    "under different users, lighting, and camera conditions."
+)
 
 # ================= MODEL PERFORMANCE =================
 
