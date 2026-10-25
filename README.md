@@ -56,7 +56,8 @@ The actions associated with each gesture depend on the selected control program.
 
 ```text
 
-Hand_Gesture_Recognition/
+
+hand-gesture-recognition-ml/
 ├── data/
 │   ├── hand_gestures.csv
 │   └── hand_gestures_test.csv
@@ -76,9 +77,11 @@ Hand_Gesture_Recognition/
 ├── .gitignore
 └── README.md
 
+
 ```
 
 ## Installation
+
 
 
 ### 1. Clone the repository
@@ -86,6 +89,7 @@ Hand_Gesture_Recognition/
 ```bash
 git clone https://github.com/Lavish-prgms/hand-gesture-recognition-ml.git
 cd hand-gesture-recognition-ml
+
 ```
 
 
