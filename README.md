@@ -1,24 +1,37 @@
 
 # Hand Gesture Recognition and PC Control Using Machine Learning
 
-A webcam-based Machine Learning project that recognizes predefined hand gestures and supports hands-free desktop interaction.
+A webcam-based Machine Learning project that recognizes predefined hand gestures and enables hands-free desktop interaction.
+
+## Live Dashboard
+
+Explore the project dashboard here:
+
+**[Hand Gesture AI Dashboard](https://hand-gesture-recognition-ml.streamlit.app/)**
+
+The dashboard displays project information, dataset statistics, model details, and fresh-session evaluation results.
 
 ## Project Overview
 
-This project combines computer vision, hand landmark detection, machine learning, and desktop automation. It uses MediaPipe to detect hand landmarks and a trained Random Forest classifier to recognize predefined gestures.
+This project integrates computer vision, hand landmark detection, machine learning, and desktop automation.
+
+MediaPipe detects 21 hand landmarks from webcam frames. The landmarks are converted into numerical features, which are processed by a trained Random Forest classifier to recognize predefined gestures.
+
+The recognized gestures and hand movements can then be mapped to supported computer actions.
 
 ## Features
 
 - Real-time hand detection using a webcam
 - Detection of 21 hand landmarks
-- Collection and analysis of a labeled gesture dataset
+- Collection of a labeled gesture dataset
 - Gesture classification using Random Forest
-- Live gesture recognition with a confidence score
-- Experimental mouse movement, clicking, and scrolling
+- Live gesture recognition with confidence scores
+- Experimental cursor movement, clicking, and scrolling
 - Gesture-based desktop and PowerPoint control
-- Streamlit dashboard for project information and dataset exploration
+- Interactive Streamlit dashboard
+- Model evaluation with accuracy, precision, recall, F1-score, and a confusion matrix
 
-Some desktop-control features are experimental and may require further tuning for reliable operation.
+Desktop-control features are experimental and may require further tuning for reliable operation.
 
 ## Technologies Used
 
@@ -27,36 +40,36 @@ Some desktop-control features are experimental and may require further tuning fo
 - MediaPipe
 - Scikit-learn
 - NumPy and Pandas
+- Joblib
 - PyAutoGUI
 - Streamlit
 - PyWin32 for Windows PowerPoint automation
 
 ## Recognized Gestures
 
-The dataset contains these five gesture classes:
+The dataset includes five gesture classes:
 
-- Open Palm
-- Fist
-- Peace
-- Thumbs Up
-- Pointing
+1. Open Palm
+2. Fist
+3. Peace
+4. Thumbs Up
+5. Pointing
 
 The actions associated with each gesture depend on the selected control program.
 
 ## Project Workflow
 
-1. Capture webcam frames.
+1. Capture frames from the webcam.
 2. Detect hand landmarks using MediaPipe.
 3. Extract numerical features from the landmarks.
-4. Train a Random Forest classifier using labeled gesture samples.
+4. Train a Random Forest classifier using labeled examples.
 5. Predict gestures from live webcam input.
 6. Map recognized gestures or hand movements to supported computer actions.
+7. Evaluate model performance using a separate test dataset.
 
 ## Project Structure
 
 ```text
-
-
 hand-gesture-recognition-ml/
 ├── data/
 │   ├── hand_gestures.csv
@@ -76,30 +89,26 @@ hand-gesture-recognition-ml/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-
-
 ```
 
 ## Installation
-
-
 
 ### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Lavish-prgms/hand-gesture-recognition-ml.git
 cd hand-gesture-recognition-ml
-
 ```
-
 
 ### 2. Create a virtual environment
 
-```bash
+Python 3.10 is recommended for the local Windows setup.
+
+```powershell
 python -m venv .venv
 ```
 
-Activate it on Windows PowerShell:
+Activate the environment in Windows PowerShell:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
@@ -107,52 +116,81 @@ Activate it on Windows PowerShell:
 
 ### 3. Install dependencies
 
-```bash
+```powershell
 python -m pip install -r requirements.txt
 ```
-
-
-## Model Evaluation
-
-Run the following command to evaluate the trained model on a fresh webcam test session:
-
-```bash
-python evaluate_model.py
-```
-
-The script collects test samples for the five predefined gestures and reports accuracy, precision, recall, F1-score, and the confusion matrix.
-
-Evaluation results are saved to `model/evaluation_metrics.json`.
-
-Results reflect the recorded test session and may vary with users, lighting, camera quality, and hand position.
 
 ## Run the Project
 
 ### Launch the dashboard
 
-```bash
+```powershell
 python -m streamlit run dashboard.py
+```
+
+### Run hand detection
+
+```powershell
+python hand_detection.py
 ```
 
 ### Run live gesture recognition
 
-```bash
+```powershell
 python live_gesture_recognition.py
 ```
 
 ### Run desktop gesture control
 
-```bash
+```powershell
 python desktop_gesture_control.py
 ```
 
+This program provides experimental cursor movement, pinch-based double-clicking, and scrolling controls.
+
 ### Run PowerPoint gesture control
 
-```bash
+```powershell
 python gesture_ppt_control.py
 ```
 
-Close other webcam-based programs before launching another to avoid camera conflicts.
+PowerPoint control requires Microsoft PowerPoint to be installed and open.
+
+Close other webcam-based programs before starting another to avoid camera conflicts.
+
+## Model Evaluation
+
+Run:
+
+```powershell
+python evaluate_model.py
+```
+
+The evaluation script collects a fresh webcam test session for the five predefined gestures. It then calculates:
+
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Confusion matrix
+
+The results are saved to:
+
+`model/evaluation_metrics.json`
+
+Evaluation results describe the recorded test session. They do not guarantee the same performance for different users, cameras, lighting conditions, or hand positions.
+
+## Dashboard
+
+The Streamlit dashboard contains five sections:
+
+- **Overview:** Project introduction and workflow
+- **Dataset Explorer:** Sample counts and dataset preview
+- **Model Details:** Trained model information
+- **Performance:** Evaluation metrics and confusion matrix
+- **Demo Guide:** Instructions for running the project components
+
+The online dashboard presents project information and evaluation results. Webcam-based recognition and desktop-control programs run locally on the user's computer.
 
 ## Applications
 
@@ -162,17 +200,23 @@ Close other webcam-based programs before launching another to avoid camera confl
 - Contactless user interfaces
 - Human-computer interaction prototypes
 
+These are potential applications; the current prototype has not been validated for every environment.
+
 ## Limitations
 
-Recognition performance can vary with hand position, lighting, camera quality, and gesture similarity. Independent testing is required to measure real-world accuracy. This prototype recognizes predefined gestures and is not a complete sign-language translation system.
+Recognition performance can vary with hand position, lighting, camera quality, and gesture similarity.
+
+A high score on one test session does not establish universal real-world accuracy. Additional testing with independent users and recording conditions is required.
+
+The system recognizes predefined gestures and is not a complete sign-language translation system.
 
 ## Future Improvements
 
-- Improve recognition on unseen recordings
-- Add more gestures
+- Evaluate recognition across different users and environments
 - Improve cursor smoothing and scroll control
-- Integrate additional desktop applications
-- Develop a unified voice-and-gesture assistant
+- Reduce accidental gesture activations
+- Add more desktop applications
+- Integrate voice commands with gesture control
 
 ## Project Type
 
